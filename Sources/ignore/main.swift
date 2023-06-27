@@ -19,7 +19,7 @@ do {
 	exit(1)
 }
 
-guard let path = try? Path.current.children().filter({ path in
+guard let projectPath = try? Path.current.children().filter({ path in
 	guard let last = path.components.last else {
 		return false
 	}
@@ -29,12 +29,6 @@ guard let path = try? Path.current.children().filter({ path in
 	logger.logError("failed to unwrap project path")
 	exit(1)
 }
-
-guard let projectPath = path else {
-	logger.logError("failed to unwrap project path")
-	exit(1)
-}
-
 
 guard let project = try? XcodeProj(path: projectPath) else {
 	logger.logError("failed to load project")
